@@ -1,9 +1,14 @@
 import "dotenv/config";
-import { app } from "./app";
+import Fastify from "fastify";
+
+const app = Fastify({ logger: true });
+
+app.get("/", async () => {
+  return { status: "ok" };
+});
 
 const port = Number(process.env.PORT || 3000);
 
 app.listen({ port, host: "0.0.0.0" }, () => {
-  console.log(`Vahlay QC Bot running on port ${port}`);
+  console.log(`SERVER RUNNING ON ${port}`);
 });
-
