@@ -1,7 +1,6 @@
-import "dotenv/config";
 import Fastify from "fastify";
 
-const app = Fastify({ logger: true });
+const app = Fastify();
 
 app.get("/", async () => {
   return { status: "ok" };
@@ -9,6 +8,11 @@ app.get("/", async () => {
 
 const port = Number(process.env.PORT || 3000);
 
-app.listen({ port, host: "0.0.0.0" }, () => {
-  console.log(`SERVER RUNNING ON ${port}`);
-});
+app.listen({ port, host: "0.0.0.0" })
+  .then(() => {
+    console.log(`SERVER RUNNING ON ${port}`);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
