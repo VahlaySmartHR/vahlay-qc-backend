@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Call {
+  id         String   @id @default(uuid())
+  call_id    String   @unique
+  agent      String
+  did        String
+  audio_url  String
+  transcript String?
+  created_at DateTime @default(now())
+}
+
+model QCResult {
+  id              String   @id @default(uuid())
+  call_id         String
+  score           Int
+  sentiment       String
+  compliance      String
+  strengths       Json
+  issues          Json
+  recommendations Json
+  summary         String
+  qc_version      String
+  created_at      DateTime @default(now())
+}
