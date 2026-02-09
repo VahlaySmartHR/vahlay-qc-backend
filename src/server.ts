@@ -1,6 +1,9 @@
-import { app } from "./app";
-import "dotenv/config";
+import "dotenv/config";   // ✅ MUST be first line
 
-app.listen({ port: Number(process.env.PORT) }, () => {
-  console.log("Vahlay QC Bot running");
+import { app } from "./app";
+
+const port = Number(process.env.PORT) || 4000;
+
+app.listen({ port }, () => {
+  console.log(`Vahlay QC Bot running on port ${port}`);
 });
